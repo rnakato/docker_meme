@@ -1,4 +1,4 @@
-FROM rnakato/ubuntu:18.04
+FROM rnakato/ubuntu:20.04
 MAINTAINER Ryuichiro Nakato <rnakato@iam.u-tokyo.ac.jp>
 
 WORKDIR /opt
@@ -15,6 +15,7 @@ RUN apt update \
     libexpat1-dev \
     libxml2-dev \
     python \
+    zlib1g-dev \
     && apt clean \
     && rm -rf /var/lib/apt/list
 
@@ -41,9 +42,9 @@ RUN bash \
 
 # MEME
 # MEME uses Python2 (specified by "--with-python=/usr/bin/python")
-RUN wget http://meme-suite.org/meme-software/5.1.0/meme-5.1.0.tar.gz \
-    && tar zxvf meme-5.1.0.tar.gz \
-    && cd meme-5.1.0 \
+RUN wget http://meme-suite.org/meme-software/5.1.1/meme-5.1.1.tar.gz \
+    && tar zxvf meme-5.1.1.tar.gz \
+    && cd meme-5.1.1 \
     && ./configure --prefix=/opt/meme --with-url=http://meme-suite.org \
     --enable-build-libxml2 \
     --enable-build-libxslt \
@@ -62,6 +63,6 @@ RUN mkdir db \
     && wget http://meme-suite.org/meme-software/Databases/tgene/tgene_databases.1.0.tgz \
     && tar zxvf tgene_databases.1.0.tgz
 
-ENV PATH ${PATH}:/opt/meme/bin:/opt/meme/libexec/meme-5.1.0
+ENV PATH ${PATH}:/opt/meme/bin:/opt/meme/libexec/meme-5.1.1
 
 CMD ["/bin/bash"]
