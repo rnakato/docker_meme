@@ -1,5 +1,5 @@
 FROM rnakato/ubuntu:20.04
-MAINTAINER Ryuichiro Nakato <rnakato@iam.u-tokyo.ac.jp>
+MAINTAINER Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>
 
 WORKDIR /opt
 
