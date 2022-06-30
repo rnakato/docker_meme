@@ -1,13 +1,13 @@
 FROM rnakato/ubuntu:20.04
-MAINTAINER Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>
+LABEL maintainer="Ryuichiro Nakato <rnakato@iqb.u-tokyo.ac.jp>"
 
 WORKDIR /opt
 
 ENV DEBIAN_FRONTEND=noninteractive
 SHELL ["/bin/bash", "-c"]
 
-RUN apt update \
-    && apt install -y --no-install-recommends \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
     build-essential \
     ca-certificates \
     curl \
@@ -16,12 +16,12 @@ RUN apt update \
     libxml2-dev \
     python \
     zlib1g-dev \
-    && apt clean \
+    && apt-get clean \
     && rm -rf /var/lib/apt/list
 
 # MEME
 # MEME uses Python2 (specified by "--with-python=/usr/bin/python")
-RUN wget https://meme-suite.org/meme/meme-software/5.4.1/meme-5.4.1.tar.gz \
+RUN wget --progress=dot:giga https://meme-suite.org/meme/meme-software/5.4.1/meme-5.4.1.tar.gz \
 https://meme-suite.org/meme/meme-software/5.4.1/meme-5.4.1.tar.gz \
     && tar zxvf meme-5.4.1.tar.gz \
     && cd meme-5.4.1 \
@@ -35,11 +35,11 @@ https://meme-suite.org/meme/meme-software/5.4.1/meme-5.4.1.tar.gz \
 
 RUN mkdir db \
     && cd db \
-    && wget https://meme-suite.org/meme/meme-software/Databases/motifs/motif_databases.12.22.tgz \
+    && wget --progress=dot:giga https://meme-suite.org/meme/meme-software/Databases/motifs/motif_databases.12.22.tgz \
     && tar zxvf motif_databases.12.22.tgz \
-    && wget http://meme-suite.org/meme-software/Databases/gomo/gomo_databases.3.2.tgz \
+    && wget --progress=dot:giga http://meme-suite.org/meme-software/Databases/gomo/gomo_databases.3.2.tgz \
     && tar zxvf gomo_databases.3.2.tgz \
-    && wget http://meme-suite.org/meme-software/Databases/tgene/tgene_databases.1.0.tgz \
+    && wget --progress=dot:giga http://meme-suite.org/meme-software/Databases/tgene/tgene_databases.1.0.tgz \
     && tar zxvf tgene_databases.1.0.tgz
 
 COPY policy.xml /etc/ImageMagick-6/policy.xml
